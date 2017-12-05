@@ -66,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
     class StyleCallback implements ActionMode.Callback {
 
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            System.out.println("Test Custom menu");
+            menu.clear();
             MenuInflater inflater = mode.getMenuInflater();
             inflater.inflate(R.menu.style, menu);
-            menu.removeItem(android.R.id.selectAll);
             return true;
         }
 
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            menu.removeItem(android.R.id.selectAll);
             return false;
         }
 
@@ -84,24 +84,14 @@ public class MainActivity extends AppCompatActivity {
             SpannableStringBuilder ssb = new SpannableStringBuilder(textView.getText());
 
             switch(item.getItemId()) {
-
-                case R.id.bold:
-                    System.out.println("Test Custom menu - bold");
+                case R.id.marking:
                     cs = new StyleSpan(Typeface.BOLD);
                     ssb.setSpan(cs, start, end, 1);
                     textView.setText(ssb);
                     return true;
 
-                case R.id.italic:
-                    System.out.println("Test Custom menu - italic");
+                case R.id.undo:
                     cs = new StyleSpan(Typeface.ITALIC);
-                    ssb.setSpan(cs, start, end, 1);
-                    textView.setText(ssb);
-                    return true;
-
-                case R.id.underline:
-                    System.out.println("Test Custom menu - underline");
-                    cs = new UnderlineSpan();
                     ssb.setSpan(cs, start, end, 1);
                     textView.setText(ssb);
                     return true;

@@ -2,13 +2,10 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/italic"
+    <item android:id="@+id/marking"
         app:showAsAction="always"
-        android:title="Italic"/>
-    <item android:id="@+id/bold"
+        android:title="Marking"/>
+    <item android:id="@+id/undo"
         app:showAsAction="always"
-        android:title="Bold"/>
-    <item android:id="@+id/underline"
-        app:showAsAction="always"
-        android:title="Underline"/>
+        android:title="Undo"/>
 </menu>
