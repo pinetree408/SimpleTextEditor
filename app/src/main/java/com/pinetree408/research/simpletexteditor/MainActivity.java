@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
+import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.view.ActionMode;
@@ -85,14 +86,17 @@ public class MainActivity extends AppCompatActivity {
 
             switch(item.getItemId()) {
                 case R.id.marking:
-                    cs = new StyleSpan(Typeface.BOLD);
+                    cs = new StrikethroughSpan();
                     ssb.setSpan(cs, start, end, 1);
                     textView.setText(ssb);
                     return true;
 
                 case R.id.undo:
-                    cs = new StyleSpan(Typeface.ITALIC);
-                    ssb.setSpan(cs, start, end, 1);
+                    Object spansToRemove[] = ssb.getSpans(start, end, Object.class);
+                    for(Object span: spansToRemove){
+                        if(span instanceof CharacterStyle)
+                            ssb.removeSpan(span);
+                    }
                     textView.setText(ssb);
                     return true;
             }
