@@ -1,23 +1,15 @@
 package com.pinetree408.research.simpletexteditor;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
 import android.text.style.StrikethroughSpan;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.io.BufferedReader;
@@ -47,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append('\n');
@@ -64,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    class StyleCallback implements ActionMode.Callback {
+    private class StyleCallback implements ActionMode.Callback {
 
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             menu.clear();
@@ -79,14 +71,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            CharacterStyle cs;
             int start = textView.getSelectionStart();
             int end = textView.getSelectionEnd();
             SpannableStringBuilder ssb = new SpannableStringBuilder(textView.getText());
 
             switch(item.getItemId()) {
                 case R.id.marking:
-                    cs = new StrikethroughSpan();
+                    CharacterStyle cs = new StrikethroughSpan();
                     ssb.setSpan(cs, start, end, 1);
                     textView.setText(ssb);
                     return true;
